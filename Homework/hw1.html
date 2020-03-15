@@ -13,48 +13,64 @@
     margin: auto;
     width: 600px;
   }
+
+  .bt {
+    text-align: center;
+  }
+
+  .font1 {
+    font-size: 25px;
+    font-weight: bold;
+    display: inline-block;
+    }
+
+  .font2 {
+    font-size: 20px;
+    display: inline-block;
+    }
 </style>
 
 <body>
 
   <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/LA2_Skultuna_kontorsljusstake.jpg"
-      class="card-img-top" alt="...">
+    <img src="https://imagescdn.gettyimagesbank.com/500/201709/a10982760.jpg" class="card-img-top" alt="...">
     <div class="card-body">
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-        content.</p>
+      <h2 class="font1">경단 팝니다.</h2>
+      <h2 class="font2">5000원/1상자(10개)</h2>
+      <p class="card-text">국내산 찹쌀 5종 경단팝니다. 종류당 2개씩 1상자 열개 포장입니다.</p>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">who the hell are you</span>
+          <span class="input-group-text" id="basic-addon1">주문자 이름</span>
         </div>
         <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <label class="input-group-text" for="inputGroupSelect01">Options</label>
+          <label class="input-group-text" for="inputGroupSelect01">수량 선택</label>
         </div>
         <select class="custom-select" id="inputGroupSelect01">
           <option value="0"></option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
         </select>
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">who the hell are you</span>
-        </div>
-        <input type="text" class="form-control" placeholder="주문수량을 알려주세요" aria-label="Username"
-          aria-describedby="basic-addon1">
-      </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">who the hell are you</span>
+          <span class="input-group-text" id="basic-addon1">주소</span>
         </div>
         <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
       </div>
-    </div>
-  </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">전화번호</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+
+      </div>
+      <div class="bt">
+        <button type="button" class="btn btn-primary">주문하기</button>
+      </div>
 
 
 
