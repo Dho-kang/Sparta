@@ -37,23 +37,27 @@
     let abc = $('#basic-addon1').val();
     if (abc === '') {
       alert('이름을 입력하세요!');
+      $('#basic-addon1').focus();
       return;
     }
 
     let abc1 = $('#inputGroupSelect01').val();
     if (abc1 == '0') {
       alert('수량을 입력하세요!');
+      $('#inputGroupSelect01').focus();
       return;
     }
 
     let abc2 = $('#add').val();
     if (abc2 === '') {
       alert('주소를 입력하세요!');
+      $('#add').focus();
       return;
     }
     let abc3 = $('#phone').val();
     if (abc3 === '') {
       alert('전화번호를 입력해주세요')
+      $('#phone').focus();
       return;
     }
     
@@ -62,8 +66,8 @@
       return;
     }
 
-    if (abc != '' && abc1 !='0' && abc2 !='' && abc3.length !=13){
-      alert('주문완료!');
+     else
+      {alert('주문완료!');
       return;
 
     }
