@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script|Single+Day&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <style>
   .card {
@@ -30,9 +31,44 @@
     font-size: 20px;
     display: inline-block;
   }
-
-  
 </style>
+<script>
+  function a2() {
+    let abc = $('#basic-addon1').val();
+    if (abc === '') {
+      alert('이름을 입력하세요!');
+      return;
+    }
+
+    let abc1 = $('#inputGroupSelect01').val();
+    if (abc1 == '0') {
+      alert('수량을 입력하세요!');
+      return;
+    }
+
+    let abc2 = $('#add').val();
+    if (abc2 === '') {
+      alert('주소를 입력하세요!');
+      return;
+    }
+    let abc3 = $('#phone').val();
+    if (abc3 === '') {
+      alert('전화번호를 입력해주세요')
+      return;
+    }
+    
+    if (abc3.length != 13) {
+      alert('xxx-xxxx-xxxx 로 입력해주세요!');
+      return;
+    }
+
+    if (abc != '' && abc1 !='0' && abc2 !='' && abc3.length !=13){
+      alert('주문완료!');
+      return;
+
+    }
+  }
+</script>
 
 <body>
 
@@ -44,16 +80,16 @@
       <p class="card-text">국내산 찹쌀 5종 경단팝니다. 종류당 2개씩 1상자 열개 포장입니다.</p>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">주문자 이름</span>
+          <span class="input-group-text">주문자 이름</span>
         </div>
-        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        <input id="basic-addon1" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <label class="input-group-text" for="inputGroupSelect01">수량 선택</label>
         </div>
         <select class="custom-select" id="inputGroupSelect01">
-          <option value="0"></option>
+          <option value="0">수량을 선택하세요</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -63,17 +99,17 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">주소</span>
         </div>
-        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        <input id="add" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">전화번호</span>
         </div>
-        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        <input id="phone" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
 
       </div>
       <div class="bt">
-        <button type="button" class="btn btn-primary">주문하기</button>
+        <button type="button" class="btn btn-primary" onclick="a2 ()">주문하기</button>
       </div>
     </div>
   </div>
