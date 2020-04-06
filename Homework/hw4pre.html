@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>떡 사세요~ 떡!</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script|Single+Day&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+</head>
+<style>
+  .wrap {
+    margin: auto;
+    width: 600px;
+    font-family: 'Single Day', cursive;
+  }
+
+  .bt {
+    text-align: center;
+  }
+
+  .font1 {
+    font-size: 25px;
+    font-weight: bold;
+    display: inline-block;
+  }
+
+  .font2 {
+    font-size: 20px;
+    display: inline-block;
+  }
+
+  .orders {
+    margin-top: 100px;
+  }
+</style>
+<script>
+
+
+
+  function make_order() {
+    let name = $('#basic-addon1').val();
+    let qty = $('#inputGroupSelect01').val();
+    let addr = $('#add').val();
+    let phone = $('#phone').val();
+
+
+    if (name === '') {
+      alert('이름을 입력하세요!');
+      $('#basic-addon1').focus();
+      return;
+    }
+
+
+    if (qty == '0') {
+      alert('수량을 선택하세요!');
+      $('#inputGroupSelect01').focus();
+      return;
+    }
+
+
+    if (addr === '') {
+      alert('주소를 입력하세요!');
+      $('#add').focus();
+      return;
+    }
+
+    if (phone === '') {
+      alert('전화번호를 입력해주세요')
+      $('#phone').focus();
+      return;
+    }
+
+    if (phone.length != 13) {
+      alert('xxx-xxxx-xxxx 로 입력해주세요!');
+      return;
+    }
+
+    else {
+      alert('주문완료!');
+      return;
+
+    }
+    $.ajax({
+      type: 'POST', // 타입을 작성합니다.
+      url: '/orders', // url을 작성합니다.
+      data: {
+        name_give: name,
+        qty_give: qty,
+        addr_give: addr,
+        phone_give: phone
+      }, // data를 작성합니다. },
+      success: function (response) {
+        if (response['result'] == 'success') {
+          alert(response['msg']);
+          $('#basic-addon1').val('');
+          $('#inputGroupSelect01').val('');
+          $('#add').val('');
+          $('#phone').val('');
+          window.location.reload();
+
+        }
+      }
+    });
+  }
+  $(document).ready(function () {
+    $('#orders-box').html('');
+    listing();
+  });
+
+
+  function listing() {
+    // 1. 리뷰 목록을 서버에 요청하기
+    // 2. 요청 성공 여부 확인하기
+    // 3. 요청 성공했을 때 리뷰를 올바르게 화면에 나타내기
+    $.ajax({
+      type: "GET",
+      url: "/orders",
+      data: {},
+      success: function (response) {
+        if (response['result'] == 'success') {
+          alert(response['msg']);
+          let list = response['orders'];
+          // 2. 성공했을 때 리뷰를 올바르게 화면에 나타내기
+          for (let i = 0; i < list.length; i++) {
+            let item = list[i];
+            make_card(item['name'], item['qty'], item['addr'], item['phone']);
+          }
+        } else {
+          alert('주문을 받아오지 못했습니다');
+        }
+      }
+    });
+  }
+
+  function make_card(name, qty, addr, phone) {
+    let temp_html = '<tr>\
+                                <td>'+ name + '</td>\
+                                <td>'+ qty + '</td>\
+                                <td>'+ addr + '</td>\
+                                <td>'+ phone + '</td>\
+                            </tr>';
+    $('#orders-box').append(temp_html);
+  }
+
+
+</script>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <img src="https://imagescdn.gettyimagesbank.com/500/201709/a10982760.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h2 class="font1">경단 팝니다.</h2>
+        <h2 class="font2">5000원/1상자(10개)</h2>
+        <p class="card-text">국내산 찹쌀 5종 경단팝니다. 종류당 2개씩 1상자 열개 포장입니다.</p>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">주문자 이름</span>
+          </div>
+          <input id="basic-addon1" type="text" class="form-control" aria-label="Username"
+            aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">수량 선택</label>
+          </div>
+          <select class="custom-select" id="inputGroupSelect01">
+            <option value="0">수량을 선택하세요</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">주소</span>
+          </div>
+          <input id="add" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">전화번호</span>
+          </div>
+          <input id="phone" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+
+        </div>
+        <div class="bt">
+          <button type="button" class="btn btn-primary" onclick="make_order()">주문하기</button>
+        </div>
+      </div>
+    </div>
+    <div class="orders">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">이름</th>
+            <th scope="col">수량</th>
+            <th scope="col">주소</th>
+            <th scope="col">전화번호</th>
+          </tr>
+        </thead>
+        <tbody id="orders-box">
+          <tr>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
